@@ -5,8 +5,20 @@ CSC510 Software Engineering HW2
 
 ## OO Design Patterns
 
+### Creational Patterns
+  * `Singleton Pattern`: This design pattern is used when we need to make sure that a class has only one instance and all the other class instances are using the single instance of the singleton class (kind of like a global variable). In Java, this design pattern can be implemented by having a private constructor and a single private instance of the class defined within itself. The class instance can be accessed using a `public static getInstance()` method which initializes the private instance (if not already initialized) and returns it to the calling class.
+  * `Factory Pattern`: In this design pattern, the base for creating an object is defined as an interface and the actual instantiation is done using subclasses. It uses the OO principle of inheritance to create the objects. In Java, this can be implemented by creating an interface and then creating classes which implement that interface. Now, we can have an object of the interface, but it will be instantiated as one of its implementing classes.
+
+### Structural Patterns
+  * `Adapter Pattern`: This design pattern is used when we have two classes that are incompatible, but they need to be used together. To implement this design patter, one of the classes is wrapped with an interface, which is in accordance with what is expected by the second class, thus allowing the second class to be able to interact with the first class which was previously incompatible.
+  * `Decorator Pattern`: In this design pattern, additional functionality is added to an object dynamically after it has already been created. It is applicable when the functionality needs to be added dynamically to an object as opposed to adding it in a static way to the entire class (as in Inheritance). This can be achieved by creating multiple sub classes which extend and add features to the base class.
+
+### Behavioral Patterns
+  * `Observer Pattern`: This pattern is used when one (or more) objects need to subscribe to notifications for the changes in state of some object. Once the target object changes state, all the observing objects are notified of the change. To achieve this functionality, we can create an observer class which registers the classes which are interested in recieving updates for the changes of an object (all such classes must extend the observer class). The observer class has a method called `update()` which will be called for each of its registered classes whenever the state of the target object is changed, thus notifying the interested objects of the change)
+  * `Memento Pattern`: This pattern is used when we need to return an object to a previous state (like the undo functionality in MS word). this can be achieved by creating a memento class which maintains the state of an object by storing the state everytime the state of the target object has changed.
 
 ## Free-style
 
 
 ## Selenium Testing
+The unit tests can be found [here](selenium/src/test/java/com/tests/WebTests.java).
