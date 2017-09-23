@@ -21,6 +21,7 @@ import io.github.bonigarcia.wdm.ChromeDriverManager;
 public class WebTests {
 
 	private static WebDriver driver;
+	private static final String URL = "http://www.checkbox.io/studies.html";
 
 	@BeforeClass
 	public static void setUp() throws Exception {
@@ -42,13 +43,14 @@ public class WebTests {
 	}
 
 	/**
-	 * Assert `The participant count of "Frustration of Software Developers" is 55`
+	 * This test asserts that `The participant count of "Frustration of Software
+	 * Developers" is 55`
 	 * 
 	 * @throws Exception
 	 */
 	@Test
 	public void participationCount() throws Exception {
-		driver.get("http://www.checkbox.io/studies.html");
+		driver.get(URL);
 		String titlePath = "//div[@class='span8']//span[.='Frustration of Software Developers']";
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(titlePath)));
@@ -60,32 +62,34 @@ public class WebTests {
 	}
 
 	/**
-	 * Assert `The total number of studies closed is 5.`
+	 * This test asserts that `The total number of studies closed is 5.`
 	 * 
 	 * @throws Exception
 	 */
 	@Test
 	public void closed() throws Exception {
-		driver.get("http://www.checkbox.io/studies.html");
+		driver.get(URL);
+		String closedPostPath = "//a[@class='status']/span[.='CLOSED']";
 		WebDriverWait wait = new WebDriverWait(driver, 30);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='status']/span[.='CLOSED']")));
-		List<WebElement> spans = driver.findElements(By.xpath("//a[@class='status']/span[.='CLOSED']"));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(closedPostPath)));
+		List<WebElement> spans = driver.findElements(By.xpath(closedPostPath));
 		assertNotNull(spans);
 		assertEquals(5, spans.size());
 	}
 
 	/**
-	 * Assert `If a status of a study is open, you can click on a "Participate"
-	 * button.`
+	 * This test asserts that `If a status of a study is open, you can click on a
+	 * "Participate" button.`
 	 * 
 	 * @throws Exception
 	 */
 	@Test
 	public void clickableButton() throws Exception {
-		driver.get("http://www.checkbox.io/studies.html");
+		driver.get(URL);
+		String openPostPath = "//a[@class='status']/span[.='OPEN']";
 		WebDriverWait wait = new WebDriverWait(driver, 30);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='status']/span[.='OPEN']")));
-		List<WebElement> spans = driver.findElements(By.xpath("../a[@class='status']/span[.='OPEN']"));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(openPostPath)));
+		List<WebElement> spans = driver.findElements(By.xpath(openPostPath));
 		assertNotNull(spans);
 		for (WebElement span : spans) {
 			WebElement child = span.findElement(By.xpath("../following-sibling::div//button"));
@@ -98,13 +102,13 @@ public class WebTests {
 	}
 
 	/**
-	 * Assert `Check if the "Software Changes Survey" has a Amazon reward image.`
+	 * This test asserts that `"Software Changes Survey" has a Amazon reward image.`
 	 * 
 	 * @throws Exception
 	 */
 	@Test
 	public void rewardImage() throws Exception {
-		driver.get("http://www.checkbox.io/studies.html");
+		driver.get(URL);
 		String titlePath = "//div[@class='span8']//span[.='Software Changes Survey']";
 		WebDriverWait wait = new WebDriverWait(driver, 30);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(titlePath)));
