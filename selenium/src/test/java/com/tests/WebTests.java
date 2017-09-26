@@ -93,9 +93,20 @@ public class WebTests {
 		assertNotNull(spans);
 		for (WebElement span : spans) {
 			WebElement child = span.findElement(By.xpath("../following-sibling::div//button"));
-			if (child.isDisplayed() && child.isEnabled()) {
-				assertTrue(true);
+			// System.out.println(child.getText());
+			if ("Participate".equals(child.getText()) && child.isDisplayed() && child.isEnabled()) {
+				// case when participate button is there.
+				try {
+					child.click();
+					// case when participate button is click-able
+					assertTrue(true);
+				} catch (Exception e) {
+					// case when participate button is there and enabled and displayed, but it
+					// cannot be clicked.
+					assertTrue(false);
+				}
 			} else {
+				// case when participate button itself is not there, or is disabled or hidden.
 				assertTrue(false);
 			}
 		}
@@ -116,6 +127,9 @@ public class WebTests {
 		assertNotNull(title);
 		WebElement amazonImage = title.findElement(By.xpath("../following-sibling::div[@class='award']/div/span/img"));
 		assertNotNull(amazonImage);
+		// System.out.println(amazonImage.getAttribute("src"));
+		// Check that the reward image is of 'amazon'
+		assertTrue(amazonImage.getAttribute("src").contains("amazon"));
 	}
 
 }
